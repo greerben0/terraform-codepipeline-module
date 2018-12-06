@@ -4,7 +4,6 @@ locals {
 
 resource "aws_iam_role" "codepipeline_role" {
   name = "codepipeline-role"
-
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -23,7 +22,6 @@ EOF
 
 resource "aws_iam_role" "codebuild_role" {
   name = "codebuild-role"
-
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -149,6 +147,8 @@ resource "aws_s3_bucket" "site_artifacts_bucket" {
       days = 90
     }
   }
+
+  tags = "${var.tags}"
 }
 resource "aws_codebuild_project" "codebuild" {
   name          = "${var.app_name}-codebuild"
@@ -173,6 +173,8 @@ resource "aws_codebuild_project" "codebuild" {
   source {
     type = "CODEPIPELINE"
   }
+
+  tags = "${var.tags}"
 }
 
 resource "aws_codepipeline" "pipeline" {

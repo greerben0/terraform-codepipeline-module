@@ -22,3 +22,7 @@ variable "deployment_bucket_name" {
 variable "deployment_bucket_arn" {
     description = "ARN of the deployment bucket"
 }
+
+variable "tags" {
+    default = {}
+}
